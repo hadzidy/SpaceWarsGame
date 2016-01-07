@@ -6,12 +6,12 @@ module com.swGame.ui {
 
     export class KeyboardController {
 
-        static UP_KEY   : number = 38;
-        static RIGHT_KEY   : number = 39;
-        static LEFT_KEY   : number = 37;
-        static SHOOT_KEY   : number = 32;
+        static UP_KEY:number = 38;
+        static RIGHT_KEY:number = 39;
+        static LEFT_KEY:number = 37;
+        static SHOOT_KEY:number = 32;
 
-        private static KEY_PRESS:Object = {};
+        private static KEY_PRESS:{[key:number]:boolean} = {};
 
         public static initialize(document:JQuery):void {
 
@@ -35,7 +35,7 @@ module com.swGame.ui {
         public static isKeyDown(pressKey:number):boolean {
             return KeyboardController.KEY_PRESS[pressKey];
         }
-        
+
     }
 
 }

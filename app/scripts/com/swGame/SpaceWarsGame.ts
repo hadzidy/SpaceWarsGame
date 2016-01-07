@@ -2,11 +2,13 @@
  * Created by had on 1/6/16.
  */
 
+/// <reference path="./display/Bullet.ts" />
 /// <reference path="./display/Spaceship.ts" />
 /// <reference path="./ui/KeyboardController.ts" />
 
 module com.swGame {
 
+    import Bullet = com.swGame.display.Bullet;
     import Spaceship = com.swGame.display.Spaceship;
     import KeyboardController = com.swGame.ui.KeyboardController;
 
@@ -16,11 +18,18 @@ module com.swGame {
         private _player:Spaceship;
         private _ticker_handler:{ handleEvent: (eventObj: Object) => void; };
 
+        //* aquí no
+        private _bullet:Bullet;
+
         init(){
 
             KeyboardController.initialize($(document));
             this._stage = new createjs.Stage("GameCanvas");
             this._player = new Spaceship;
+
+            this._bullet= new Bullet();
+
+            this._stage.addChild(this._bullet);
             this._stage.addChild(this._player);
             this._stage.update();
             this.setTicker();
@@ -41,6 +50,7 @@ module com.swGame {
             //var deltaTime = event.delta;
             this._stage.update();
             this._player.update();
+            this._bullet.update();
         }
 
 
