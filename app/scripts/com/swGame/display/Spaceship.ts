@@ -1,11 +1,19 @@
 /**
  * Created by had on 1/6/16.
  */
+
+/// <reference path="./../ui/KeyboardController.ts" />
+/// <reference path="../utils/maths/toRadians.ts" />
+
 module com.swGame.display {
+
+    import toRadians = com.swGame.utils.maths.toRadians;
+    import KeyboardController = com.swGame.ui.KeyboardController;
 
     export class Spaceship extends createjs.Shape {
 
         private _radius:number;
+        private _shipSpeed:number= 0;
 
         constructor(){
 
@@ -29,9 +37,32 @@ module com.swGame.display {
             //this.gun.update();
         }
 
+        resetShipSpeed(){
+            this._shipSpeed = 0;
+        }
+
         private changePosition(){
-            this.x++;
-            this.y++;
+
+            this.resetShipSpeed();
+
+            if(KeyboardController.isKeyDown(KeyboardController.UP_KEY)) {
+                this._shipSpeed = 10;
+            }
+
+            //if(KeyboardController.isKeyDown(KeyboardController.DOWN_KEY)) {
+            //    this._shipSpeedY = 10;
+            //}
+            //
+            if(KeyboardController.isKeyDown(KeyboardController.LEFT_KEY)) {
+                this.rotation += -10;
+            }
+
+            if(KeyboardController.isKeyDown(KeyboardController.RIGHT_KEY)) {
+                this.rotation += 10;
+            }
+
+            this.x += Math.cos(toRadians(this.rotation)) * this._shipSpeed;
+            this.y += Math.sin(toRadians(this.rotation)) * this._shipSpeed;
 
         }
 

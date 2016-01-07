@@ -3,10 +3,12 @@
  */
 
 /// <reference path="./display/Spaceship.ts" />
+/// <reference path="./ui/KeyboardController.ts" />
 
 module com.swGame {
 
     import Spaceship = com.swGame.display.Spaceship;
+    import KeyboardController = com.swGame.ui.KeyboardController;
 
     export class SpaceWarsGame{
 
@@ -16,6 +18,7 @@ module com.swGame {
 
         init(){
 
+            KeyboardController.initialize($(document));
             this._stage = new createjs.Stage("GameCanvas");
             this._player = new Spaceship;
             this._stage.addChild(this._player);
