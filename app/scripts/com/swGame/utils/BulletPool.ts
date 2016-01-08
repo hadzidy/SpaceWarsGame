@@ -12,7 +12,7 @@ module com.swGame.utils {
             this.initAllocations(25);
         }
 
-        //regresa instancia de bullet
+        /*returns bullet instance*/
         alloc():Bullet {
 
             var bullet:Bullet;
@@ -23,8 +23,8 @@ module com.swGame.utils {
             }
             return bullet;
         }
-
-        //vuelve a ingresar una instancia al pool de Bullets
+        
+        /*push bullet instance to pool*/
         free(target:Bullet):void {
             this._allBullets.push(target);
         }

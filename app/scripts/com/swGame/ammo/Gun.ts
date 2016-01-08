@@ -17,7 +17,7 @@ module com.swGame.ammo {
         private _deltaTime:number;
         private _bulletPool:BulletPool = new BulletPool();
 
-        static BULLET_MAX_INTERVAL:number = 1000;
+        static BULLET_MAX_INTERVAL:number = 500;
 
         constructor(private _ship:Spaceship){
 
@@ -39,6 +39,7 @@ module com.swGame.ammo {
                 var b:Bullet = this._bulletCollection[index];
                 b.update();
 
+                /*free bullet when exceed stage limits*/
                 if(b.x < 0 || b.x > 950 || b.y < 0 || b.y > 750) {
                     this._bulletCollection.splice(index,1);
                     this._bulletPool.free(b);

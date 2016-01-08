@@ -32,7 +32,7 @@ module com.swGame.display {
         }
 
         drawGraphics():void{
-            //Draw SpaceRock Shape
+            /*Draw SpaceRock Shape*/
         }
 
         update():void {
