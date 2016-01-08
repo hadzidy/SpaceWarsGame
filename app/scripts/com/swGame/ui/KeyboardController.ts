@@ -9,6 +9,7 @@ module com.swGame.ui {
         static UP_KEY:number = 38;
         static RIGHT_KEY:number = 39;
         static LEFT_KEY:number = 37;
+
         static SHOOT_KEY:number = 32;
 
         private static KEY_PRESS:{[key:number]:boolean} = {};

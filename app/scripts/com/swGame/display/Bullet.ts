@@ -2,17 +2,29 @@
  * Created by had on 1/7/16.
  */
 
+/// <reference path="../utils/maths/toRadians.ts" />
+
 module com.swGame.display {
+
+    import toRadians= com.swGame.utils.maths.toRadians;
 
     export class Bullet extends createjs.Shape {
 
 
-        private originX:number;
-        private originY:number;
+        private _originX:number;
+        private _originY:number;
+        private _deltaX:number;
+        private _deltaY:number;
+        private _radius:number;
 
-        constructor(){
+        constructor(config?:{xPos:number;yPos:number;angle:number}){
             super();
 
+            var initPosition = config;
+            if (initPosition == null) {
+                initPosition = {xPos:0, yPos:0, angle:0};
+            }
+            this.setPosition(initPosition);
             this.init();
 
         }
@@ -25,7 +37,20 @@ module com.swGame.display {
 
         update(){
 
-            this.x += 10;
+            this.x += this._deltaX;
+            this.y += this._deltaY;
+
+        }
+
+        setPosition(config:{xPos:number;yPos:number;angle:number}){
+
+            this.x = this._originX = config.xPos;
+            this.y = this._originY = config.yPos;
+            this.rotation = config.angle;
+
+            this._deltaX = (Math.cos(toRadians(this.rotation))) * 10;
+            this._deltaY = (Math.sin(toRadians(this.rotation))) * 10;
+            this._radius= 3;
 
         }
 

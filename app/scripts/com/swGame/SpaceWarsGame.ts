@@ -18,18 +18,11 @@ module com.swGame {
         private _player:Spaceship;
         private _ticker_handler:{ handleEvent: (eventObj: Object) => void; };
 
-        //* aquí no
-        private _bullet:Bullet;
-
         init(){
 
             KeyboardController.initialize($(document));
             this._stage = new createjs.Stage("GameCanvas");
             this._player = new Spaceship;
-
-            this._bullet= new Bullet();
-
-            this._stage.addChild(this._bullet);
             this._stage.addChild(this._player);
             this._stage.update();
             this.setTicker();
@@ -47,10 +40,9 @@ module com.swGame {
         }
 
         private tick (event:Event):void {
-            //var deltaTime = event.delta;
+            var deltaTime = event["delta"];
             this._stage.update();
-            this._player.update();
-            this._bullet.update();
+            this._player.update(deltaTime);
         }
 
 

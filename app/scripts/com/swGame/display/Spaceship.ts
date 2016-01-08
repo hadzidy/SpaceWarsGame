@@ -2,16 +2,19 @@
  * Created by had on 1/6/16.
  */
 
+/// <reference path="./../ammo/Gun.ts" />
 /// <reference path="./../ui/KeyboardController.ts" />
 /// <reference path="../utils/maths/toRadians.ts" />
 
 module com.swGame.display {
 
+    import Gun = com.swGame.ammo.Gun;
     import toRadians = com.swGame.utils.maths.toRadians;
     import KeyboardController = com.swGame.ui.KeyboardController;
 
     export class Spaceship extends createjs.Shape {
 
+        public  gun:Gun;
         private _radius:number;
         private _shipSpeed:number= 0;
 
@@ -26,15 +29,18 @@ module com.swGame.display {
 
         init():void {
 
+            this.resetShipSpeed();
             this.drawGraphics();
+            this.gun = new Gun(this);
+
             this.x = 120;
             this.y = 120;
 
         }
 
-        update():void{
+        update(delta:number):void{
             this.changePosition();
-            //this.gun.update();
+            this.gun.update(delta);
         }
 
         resetShipSpeed(){
@@ -49,10 +55,6 @@ module com.swGame.display {
                 this._shipSpeed = 10;
             }
 
-            //if(KeyboardController.isKeyDown(KeyboardController.DOWN_KEY)) {
-            //    this._shipSpeedY = 10;
-            //}
-            //
             if(KeyboardController.isKeyDown(KeyboardController.LEFT_KEY)) {
                 this.rotation += -10;
             }
