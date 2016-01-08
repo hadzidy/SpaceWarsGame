@@ -21,7 +21,7 @@ module com.swGame {
         init(){
 
             KeyboardController.initialize($(document));
-            this._stage = new createjs.Stage("GameCanvas");
+            this._stage = new createjs.Stage("gameCanvas");
             this._player = new Spaceship({w:this._stage.canvas.width, h: this._stage.canvas.height});
             this._stage.addChild(this._player);
             this._stage.update();
