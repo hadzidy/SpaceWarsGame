@@ -12,7 +12,7 @@ module com.swGame.display {
 
     export class Comet extends AbstractSpaceRock{
 
-        public _radius:number= 20;
+        public _radius:number= 18;
         public target:IPoint= {x:600,y:200};
         public rockSpeed:number= 3;
 

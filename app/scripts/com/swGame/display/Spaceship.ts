@@ -15,7 +15,7 @@ module com.swGame.display {
     export class Spaceship extends createjs.Shape {
 
         private _gun:Gun;
-        private _radius:number= 14;
+        private _radius:number= 13;
         private _shipSpeed:number= 0;
 
         constructor(private _canvasSize:{w:number;h:number}){

@@ -10,7 +10,7 @@ module com.swGame.display {
 
     export class Asteroid extends AbstractSpaceRock{
 
-        public _radius:number= 15;
+        public _radius:number= 14;
 
         constructor(){
             super();

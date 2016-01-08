@@ -38,10 +38,11 @@ module com.swGame.core{
                 .drawCircle(0,0,this._game.player.radius)
                 .closePath();
 
-            this._game.stage.addChild(this._playerHitArea);
+            /*To see the hit area*/
+            //this._game.stage.addChild(this._playerHitArea);
         }
 
-        /*determina si hubo interseccion*/
+        /*determines whether there's intersections Bullet vs Rock*/
 
         private bulletVsRockCollision():void {
 
@@ -57,7 +58,6 @@ module com.swGame.core{
                     var distance = getABDistance(a,b);
                     if(distance < (bullet.radius +rock.radius)){
                         var event = new CollisionEvent(CollisionEvent.BULLET_ROCK_COLLISION_EVENT);
-                        console.log(rock);
                         event.collisionData = {bullet:bullet,rock:rock};
                         this.dispatchEvent(event);
                     }
@@ -65,6 +65,7 @@ module com.swGame.core{
             }
         }
 
+        /*determines whether there's intersections Rock vs Ship*/
 
         private rocksVsShipCollision():void{
 
