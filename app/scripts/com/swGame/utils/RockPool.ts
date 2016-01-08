@@ -2,44 +2,39 @@
  * Created by had on 1/7/16.
  */
 /// <reference path="../display/AbstractSpaceRock.ts" />
-/// <reference path="../display/Asteroid.ts" />
+/// <reference path="../display/Comet.ts" />
 
 module com.swGame.utils {
 
     import AbstractSpaceRock= com.swGame.display.AbstractSpaceRock;
-    import Asteroid= com.swGame.display.Asteroid;
+    import Comet= com.swGame.display.Comet;
 
     export class RockPool  {
 
         private _allRocks:Array<AbstractSpaceRock> = [];
 
-        private static _instace:RockPool = null;
+        private static _instance:RockPool = null;
 
         constructor() {
             this.initAllocations(25);
         }
 
         static getInstance():RockPool {
-            if(RockPool._instace == null) {
-                RockPool._instace = new RockPool();
+            if(RockPool._instance == null) {
+                RockPool._instance = new RockPool();
+                console.log("rockPool");
             }
-            return RockPool._instace;
+            return RockPool._instance;
         }
 
         alloc():AbstractSpaceRock {
 
             var rock:AbstractSpaceRock;
-
-            console.log("_allRocks: ", this._allRocks.length);
-
             if (this._allRocks.length < 1) {
-                var idRock = Math.floor(Math.random() * 4) + 1;
-                rock= new Asteroid();
-
+                rock= new Comet();
             } else {
                 rock = this._allRocks.pop();
             }
-
             return rock;
         }
 
@@ -49,8 +44,7 @@ module com.swGame.utils {
 
         private initAllocations(max:number):void {
             for (var i = 0; i < max; i++ ) {
-                var idRock= Math.floor(Math.random() * 4) + 1;
-                this._allRocks.push(new Asteroid());
+                this._allRocks.push(new Comet());
             }
             console.log(this._allRocks, "*++++++");
         }

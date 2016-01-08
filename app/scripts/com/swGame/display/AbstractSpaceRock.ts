@@ -14,9 +14,12 @@ module com.swGame.display {
     export class AbstractSpaceRock extends createjs.Shape{
 
         public _radius:number;
-        public target:IPoint;
+        public target:IPoint= {x:500,y:300};
+        public rockSpeed:number= 5;
 
-        private _speed:number= 800;
+        private _originDistance:number= 600;
+        private _deltaX:number;
+        private _deltaY:number;
 
         constructor () {
             super();
@@ -29,14 +32,26 @@ module com.swGame.display {
         }
 
         drawGraphics():void{
-
             //Draw SpaceRock Shape
-
         }
 
         update():void {
-            this.x += 10;
-            this.y += 10;
+            this.x += this._deltaX;
+            this.y += this._deltaY;
+        }
+
+        setPosition(){
+            var angle= this.getRandomAngle();
+            this.x= this.target.x+ Math.cos(angle)* this._originDistance;
+            this.y= this.target.y+ Math.sin(angle)* this._originDistance;
+            this.getDirection();
+        }
+
+        private getDirection():void{
+            var angleRotation= Math.atan2(this.target.y - this.y, this.target.x - this.x) * 180 / Math.PI;
+
+            this._deltaX = (Math.cos(toRadians(angleRotation))* this.rockSpeed);
+            this._deltaY = (Math.sin(toRadians(angleRotation))* this.rockSpeed);
         }
 
         private getRandomAngle():number {
