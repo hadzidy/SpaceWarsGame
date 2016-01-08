@@ -36,7 +36,7 @@ module com.swGame.ammo {
                 var b:Bullet = this._bulletArray[index];
                 b.update();
 
-                if(b.x < 0 || b.x > 800 || b.y < 0 || b.y > 600) {
+                if(b.x < 0 || b.x > 950 || b.y < 0 || b.y > 750) {
                     this._bulletArray.splice(index,1);
                     this._bulletPool.free(b);
                 }
@@ -44,7 +44,7 @@ module com.swGame.ammo {
 
         }
 
-        shoot(){
+        shoot():void{
 
             if(KeyboardController.isKeyDown(KeyboardController.SHOOT_KEY)){
                 if(this._bulletCurrentTime<=0){
@@ -59,7 +59,7 @@ module com.swGame.ammo {
 
         }
 
-        createBullet(){
+        createBullet():void{
 
             var b = this._bulletPool.alloc();
             b.setPosition({xPos:this._ship.x, yPos:this._ship.y, angle:this._ship.rotation});

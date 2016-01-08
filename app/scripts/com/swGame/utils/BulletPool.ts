@@ -12,12 +12,6 @@ module com.swGame.utils {
             this.initAllocations(25);
         }
 
-        private initAllocations(max:number):void {
-            for (var i = 0; i < max; i++ ) {
-                this._allBullets.push(new Bullet());
-            }
-        }
-
         //regresa instancia de bullet
         alloc():Bullet {
 
@@ -33,6 +27,12 @@ module com.swGame.utils {
         //vuelve a ingresar una instancia al pool de Bullets
         free(target:Bullet):void {
             this._allBullets.push(target);
+        }
+
+        private initAllocations(max:number):void {
+            for (var i = 0; i < max; i++ ) {
+                this._allBullets.push(new Bullet());
+            }
         }
     }
 }

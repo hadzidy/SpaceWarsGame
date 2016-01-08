@@ -24,10 +24,20 @@ module com.swGame.display {
 
         }
 
-        get radius(){
+        get radius():number{
             return this._radius;
         }
 
+        drawGraphics():void{
+
+            //Draw SpaceRock Shape
+
+        }
+
+        update():void {
+            this.x += 10;
+            this.y += 10;
+        }
 
         private getRandomAngle():number {
             return toRadians(Math.random()*360);
@@ -38,17 +48,6 @@ module com.swGame.display {
 
             this.drawGraphics();
 
-        }
-
-        drawGraphics(){
-
-            //Draw SpaceRock Shape
-
-        }
-
-        update():void {
-            this.x += 10;
-            this.y += 10;
         }
 
     }

@@ -16,7 +16,7 @@ module com.swGame.display {
             super();
         }
 
-        drawGraphics(){
+        drawGraphics():void{
             this.graphics.beginStroke("white")
                 .setStrokeStyle(2)
                 .moveTo(-15, -5)

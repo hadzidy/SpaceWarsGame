@@ -42,11 +42,11 @@ module com.swGame.display {
             this.gun.update(delta);
         }
 
-        resetShipSpeed(){
+        resetShipSpeed():void{
             this._shipSpeed = 0;
         }
 
-        private changePosition(){
+        private changePosition():void{
 
             this.resetShipSpeed();
 
@@ -62,14 +62,15 @@ module com.swGame.display {
                 this.rotation += 10;
             }
 
-            var distanceX:number = Math.cos(toRadians(this.rotation))* this._shipSpeed;
-            var distanceY:number = Math.sin(toRadians(this.rotation)) * this._shipSpeed;
+            var distanceX:number = this.x + (Math.cos(toRadians(this.rotation))* this._shipSpeed);
+            var distanceY:number = this.y + (Math.sin(toRadians(this.rotation)) * this._shipSpeed);
+            var csW:number= this._canvasSize.w;
+            var csH:number= this._canvasSize.h;
 
-            if(this.x + distanceX < this._canvasSize.w && this.x + distanceX > 0)
-                this.x += distanceX;
-
-            if(this.y + distanceY < this._canvasSize.h && this.y + distanceY > 0)
-                this.y += distanceY;
+            if(distanceX <  csW &&  distanceX > 0 && distanceY < csH &&  distanceY > 0){
+                this.x = distanceX;
+                this.y = distanceY;
+            }
 
         }
 

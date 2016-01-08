@@ -29,20 +29,20 @@ module com.swGame.display {
 
         }
 
-        init(){
+        init():void{
 
             this.drawGraphics();
 
         }
 
-        update(){
+        update():void{
 
             this.x += this._deltaX;
             this.y += this._deltaY;
 
         }
 
-        setPosition(config:{xPos:number;yPos:number;angle:number}){
+        setPosition(config:{xPos:number;yPos:number;angle:number}):void{
 
             this.x = this._originX = config.xPos;
             this.y = this._originY = config.yPos;
@@ -54,7 +54,7 @@ module com.swGame.display {
 
         }
 
-        private drawGraphics(){
+        private drawGraphics():void{
 
             this.graphics.beginFill("#FFFFFF").drawCircle(0, 0, 2)
                 .drawCircle(4, 0, 3).drawCircle(10, 0, 4);

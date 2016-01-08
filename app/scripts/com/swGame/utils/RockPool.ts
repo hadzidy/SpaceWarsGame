@@ -26,15 +26,6 @@ module com.swGame.utils {
             return RockPool._instace;
         }
 
-        private initAllocations(max:number):void {
-            for (var i = 0; i < max; i++ ) {
-                var idRock= Math.floor(Math.random() * 4) + 1;
-                this._allRocks.push(new Asteroid());
-            }
-            console.log(this._allRocks, "*++++++");
-        }
-
-        //regresa instancia de bullet
         alloc():AbstractSpaceRock {
 
             var rock:AbstractSpaceRock;
@@ -52,9 +43,16 @@ module com.swGame.utils {
             return rock;
         }
 
-        //vuelve a ingresar una instancia al pool de Bullets
         free(target:AbstractSpaceRock):void {
             this._allRocks.push(target);
+        }
+
+        private initAllocations(max:number):void {
+            for (var i = 0; i < max; i++ ) {
+                var idRock= Math.floor(Math.random() * 4) + 1;
+                this._allRocks.push(new Asteroid());
+            }
+            console.log(this._allRocks, "*++++++");
         }
     }
 }
