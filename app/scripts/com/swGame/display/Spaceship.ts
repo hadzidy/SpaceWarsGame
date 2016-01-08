@@ -59,7 +59,11 @@ module com.swGame.display {
                 this._shipSpeed = 10;
             }
 
-            if(KeyboardController.isKeyDown(KeyboardController.LEFT_KEY)) {
+            if(KeyboardController.isKeyDown(KeyboardController.JUMP_KEY)) {
+                this._shipSpeed = 20;
+            }
+
+            if(KeyboardController.isKeyDown(KeyboardController.LEFT_KEY)){
                 this.rotation += -10;
             }
 

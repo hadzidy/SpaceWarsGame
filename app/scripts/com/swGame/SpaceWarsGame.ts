@@ -13,7 +13,6 @@
 module com.swGame {
 
     import Spaceship = com.swGame.display.Spaceship;
-    import Hud = com.swGame.display.Hud;
     import Bullet = com.swGame.display.Bullet;
     import AbstractSpaceRock = com.swGame.display.AbstractSpaceRock;
     import KeyboardController = com.swGame.ui.KeyboardController;
