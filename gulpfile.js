@@ -43,9 +43,11 @@ gulp.task('scripts', function () {
     return gulp.src('./app/scripts/**/*.ts')
         .pipe(ts({
             noImplicitAny: true,
-            out: 'main.js'
+            out: 'main.js',
+            target:"ES5"
         }))
         .pipe(gulp.dest('./dist/js'))
+        .pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('scriptsBuild', function () {
@@ -84,10 +86,10 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     gulp.watch('./app/views/src/**/*.jade', ['jade']);
+    gulp.watch('./app/scripts/**/*.ts', ['lint', 'scripts']);
     gulp.watch('./app/views/*.jade', ['jade']);
     gulp.watch('./app/styles/*.scss', ['sass']);
     gulp.watch('./app/styles/src/*.scss', ['sass']);
-    gulp.watch('./app/scripts/**/*.ts', ['lint', 'scripts']);
 });
 
 gulp.task('browserSync', function() {
