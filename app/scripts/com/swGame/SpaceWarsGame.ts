@@ -22,7 +22,7 @@ module com.swGame {
 
             KeyboardController.initialize($(document));
             this._stage = new createjs.Stage("GameCanvas");
-            this._player = new Spaceship;
+            this._player = new Spaceship({w:this._stage.canvas.width, h: this._stage.canvas.height});
             this._stage.addChild(this._player);
             this._stage.update();
             this.setTicker();

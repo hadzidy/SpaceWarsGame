@@ -18,14 +18,13 @@ module com.swGame.display {
         private _radius:number;
         private _shipSpeed:number= 0;
 
-        constructor(){
+        constructor(private _canvasSize:{w:number;h:number}){
 
             super();
             this.init();
             this._radius= 14;
 
         }
-
 
         init():void {
 
@@ -63,8 +62,14 @@ module com.swGame.display {
                 this.rotation += 10;
             }
 
-            this.x += Math.cos(toRadians(this.rotation)) * this._shipSpeed;
-            this.y += Math.sin(toRadians(this.rotation)) * this._shipSpeed;
+            var distanceX:number = Math.cos(toRadians(this.rotation))* this._shipSpeed;
+            var distanceY:number = Math.sin(toRadians(this.rotation)) * this._shipSpeed;
+
+            if(this.x + distanceX < this._canvasSize.w && this.x + distanceX > 0)
+                this.x += distanceX;
+
+            if(this.y + distanceY < this._canvasSize.h && this.y + distanceY > 0)
+                this.y += distanceY;
 
         }
 
