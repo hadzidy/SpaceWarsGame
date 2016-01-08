@@ -7,6 +7,7 @@
 
 module com.swGame.utils {
 
+
     import AbstractSpaceRock= com.swGame.display.AbstractSpaceRock;
     import SpaceRocksFactory= com.swGame.utils.SpaceRocksFactory;
 
@@ -52,7 +53,7 @@ module com.swGame.utils {
         /*get rocks from SpaceRockFactory*/
 
         private getSpaceRock():AbstractSpaceRock{
-            var rockId:number= Math.floor(Math.random() * 3);
+            var rockId:number= Math.floor(Math.random() * 4);
             var rock:AbstractSpaceRock= SpaceRocksFactory.create(rockId);
             return rock;
         }

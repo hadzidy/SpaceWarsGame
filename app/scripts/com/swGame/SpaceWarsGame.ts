@@ -62,6 +62,9 @@ module com.swGame {
                 this.stopTicker();
                 setTimeout(()=>{
                     this._stage.clear();
+
+                    $("h2").css("display", "block");
+                    $("h2").animate({opacity: 1})
                 },200);
             });
 

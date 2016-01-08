@@ -6,6 +6,7 @@
 /// <reference path="../display/Asteroid.ts" />
 /// <reference path="../display/Comet.ts" />
 /// <reference path="../display/Meteorite.ts" />
+/// <reference path="../display/Planet.ts" />
 
 module com.swGame.utils{
 
@@ -13,12 +14,14 @@ module com.swGame.utils{
     import Asteroid= com.swGame.display.Asteroid;
     import Comet= com.swGame.display.Comet;
     import Meteorite= com.swGame.display.Meteorite;
+    import Planet= com.swGame.display.Planet;
 
     export class SpaceRocksFactory{
 
         static ASTEROID_TYPE:number = 0;
         static COMET_TYPE:number = 1;
         static METEORITE_TYPE:number = 2;
+        static PLANET_TYPE:number = 3;
 
         static create (id:number):AbstractSpaceRock {
             var a:AbstractSpaceRock;
@@ -33,6 +36,10 @@ module com.swGame.utils{
 
                 case SpaceRocksFactory.METEORITE_TYPE:
                     a = new Meteorite();
+                    break;
+
+                case SpaceRocksFactory.PLANET_TYPE:
+                    a = new Planet();
                     break;
             }
             return a;
