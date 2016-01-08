@@ -1,17 +1,18 @@
 /**
  * Created by had on 1/7/16.
  */
+
 /// <reference path="../display/AbstractSpaceRock.ts" />
-/// <reference path="../display/Comet.ts" />
+/// <reference path="../utils/SpaceRocksFactory.ts" />
 
 module com.swGame.utils {
 
     import AbstractSpaceRock= com.swGame.display.AbstractSpaceRock;
-    import Comet= com.swGame.display.Comet;
+    import SpaceRocksFactory= com.swGame.utils.SpaceRocksFactory;
 
     export class RockPool  {
 
-        private _allRocks:Array<AbstractSpaceRock> = [];
+        private _rockCollection:Array<AbstractSpaceRock> = [];
 
         private static _instance:RockPool = null;
 
@@ -22,7 +23,6 @@ module com.swGame.utils {
         static getInstance():RockPool {
             if(RockPool._instance == null) {
                 RockPool._instance = new RockPool();
-                console.log("rockPool");
             }
             return RockPool._instance;
         }
@@ -30,23 +30,31 @@ module com.swGame.utils {
         alloc():AbstractSpaceRock {
 
             var rock:AbstractSpaceRock;
-            if (this._allRocks.length < 1) {
-                rock= new Comet();
+            if (this._rockCollection.length < 1) {
+                rock= this.getSpaceRock();
             } else {
-                rock = this._allRocks.pop();
+                rock = this._rockCollection.pop();
             }
             return rock;
         }
 
         free(target:AbstractSpaceRock):void {
-            this._allRocks.push(target);
+            this._rockCollection.push(target);
         }
 
         private initAllocations(max:number):void {
             for (var i = 0; i < max; i++ ) {
-                this._allRocks.push(new Comet());
+                this._rockCollection.push(this.getSpaceRock());
             }
-            console.log(this._allRocks, "*++++++");
+        }
+
+
+        /*get rocks from SpaceRockFactory*/
+
+        private getSpaceRock():AbstractSpaceRock{
+            var rockId:number= Math.floor(Math.random() * 3);
+            var rock:AbstractSpaceRock= SpaceRocksFactory.create(rockId);
+            return rock;
         }
     }
 }

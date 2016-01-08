@@ -8,7 +8,7 @@ module com.swGame.display {
 
     import AbstractSpaceRock= com.swGame.display.AbstractSpaceRock;
 
-    export class Meteorites extends AbstractSpaceRock{
+    export class Meteorite extends AbstractSpaceRock{
 
         public _radius:number= 20;
         public target:IPoint= {x:400,y:400};
