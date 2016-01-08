@@ -55,7 +55,8 @@ gulp.task('scriptsBuild', function () {
         .pipe(sourcemaps.init())
         .pipe(ts({
             noImplicitAny: true,
-            out: 'main.js'
+            out: 'main.js',
+            target:"ES5"
         }))
         .pipe(gulp.dest('./dist/js'))
         .pipe(uglify())
@@ -102,3 +103,4 @@ gulp.task('browserSync', function() {
 });
 
 gulp.task('default', ['copy', 'sass', 'jade', 'lint', 'scripts', 'browserSync', 'watch', 'bower']);
+gulp.task('build', ['copy', 'sass', 'jade', 'lint', 'scriptsBuild', 'bower']);
