@@ -12,8 +12,8 @@ module com.swGame.ammo {
 
     export class Gun {
 
-        private _bulletArray:Array<Bullet>;
-        private _bulletCurrentTime: number;
+        private _bulletCollection:Array<Bullet>=[];
+        private _bulletCurrentTime: number= 0;
         private _deltaTime:number;
         private _bulletPool:BulletPool = new BulletPool();
 
@@ -21,9 +21,12 @@ module com.swGame.ammo {
 
         constructor(private _ship:Spaceship){
 
-            this._bulletArray= [];
             this._bulletCurrentTime= 0;
 
+        }
+
+        get bulletCollection():Array<Bullet>{
+            return this._bulletCollection
         }
 
         update(delta:number):void{
@@ -31,13 +34,13 @@ module com.swGame.ammo {
             this._deltaTime = delta;
             this.shoot();
 
-            for(var index in this._bulletArray) {
+            for(var index in this._bulletCollection) {
 
-                var b:Bullet = this._bulletArray[index];
+                var b:Bullet = this._bulletCollection[index];
                 b.update();
 
                 if(b.x < 0 || b.x > 950 || b.y < 0 || b.y > 750) {
-                    this._bulletArray.splice(index,1);
+                    this._bulletCollection.splice(index,1);
                     this._bulletPool.free(b);
                 }
             }
@@ -63,9 +66,16 @@ module com.swGame.ammo {
 
             var b = this._bulletPool.alloc();
             b.setPosition({xPos:this._ship.x, yPos:this._ship.y, angle:this._ship.rotation});
-            this._bulletArray.push(b);
+            this._bulletCollection.push(b);
             this._ship.parent.addChild(b);
 
+        }
+
+        removeBullet(bullet:Bullet):void{
+            this._ship.parent.removeChild(bullet);
+            var deleteR= this._bulletCollection.indexOf(bullet);
+            this._bulletCollection.splice(deleteR, 1);
+            this._bulletPool.free(bullet);
         }
 
     }

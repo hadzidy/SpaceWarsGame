@@ -3,14 +3,22 @@
  */
 
 /// <reference path="./display/Spaceship.ts" />
+/// <reference path="./display/Bullet.ts" />
+/// <reference path="./display/AbstractSpaceRock.ts" />
 /// <reference path="./ui/KeyboardController.ts" />
 /// <reference path="./core/SpaceRocksManager.ts" />
+/// <reference path="./core/CollisionManager.ts" />
+/// <reference path="./events/CollisionEvent.ts" />
 
 module com.swGame {
 
     import Spaceship = com.swGame.display.Spaceship;
+    import Bullet = com.swGame.display.Bullet;
+    import AbstractSpaceRock = com.swGame.display.AbstractSpaceRock;
     import KeyboardController = com.swGame.ui.KeyboardController;
     import SpaceRocksManager = com.swGame.core.SpaceRocksManager;
+    import CollisionManager = com.swGame.core.CollisionManager;
+    import CollisionEvent = com.swGame.events.CollisionEvent;
 
     export class SpaceWarsGame{
 
@@ -18,6 +26,19 @@ module com.swGame {
         private _player:Spaceship;
         private _ticker_handler:{ handleEvent: (eventObj: Object) => void; };
         private _spaceRocksManager:SpaceRocksManager;
+        private _collisionManager:CollisionManager;
+
+        get stage():createjs.Stage{
+            return this._stage;
+        }
+
+        get player():Spaceship{
+            return this._player;
+        }
+
+        get spaceRocksManager():SpaceRocksManager{
+            return this._spaceRocksManager;
+        }
 
         init(){
 
@@ -28,6 +49,14 @@ module com.swGame {
             this._spaceRocksManager =  new SpaceRocksManager(this._stage);
             this._stage.update();
             this.setTicker();
+            this._collisionManager = new CollisionManager(this);
+
+            this._collisionManager.addEventListener(CollisionEvent.BULLET_ROCK_COLLISION_EVENT, (e:CollisionEvent)=>{
+                var bulletToRemove:Bullet = e.bulletRockCollisionData.bullet;
+                var rockToRemove:AbstractSpaceRock = e.bulletRockCollisionData.rock;
+                this._player.gun.removeBullet(bulletToRemove);
+                this._spaceRocksManager.removeSpaceRock(rockToRemove);
+            });
 
         }
 
@@ -46,6 +75,7 @@ module com.swGame {
             this._stage.update();
             this._player.update(deltaTime);
             this._spaceRocksManager.update(deltaTime);
+            this._collisionManager.update();
         }
 
 

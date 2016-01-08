@@ -3,10 +3,12 @@
  */
 
 /// <reference path="./AbstractSpaceRock.ts" />
+/// <reference path="./../utils/IPoint.ts" />
 
 module com.swGame.display {
 
     import AbstractSpaceRock= com.swGame.display.AbstractSpaceRock;
+    import IPoint = com.swGame.utils.IPoint;
 
     export class Meteorite extends AbstractSpaceRock{
 

@@ -11,11 +11,11 @@ module com.swGame.display {
     export class Bullet extends createjs.Shape {
 
 
+        private _radius:number= 3;
         private _originX:number;
         private _originY:number;
         private _deltaX:number;
         private _deltaY:number;
-        private _radius:number;
 
         constructor(config?:{xPos:number;yPos:number;angle:number}){
             super();
@@ -27,6 +27,10 @@ module com.swGame.display {
             this.setPosition(initPosition);
             this.init();
 
+        }
+
+        get radius():number{
+            return this._radius;
         }
 
         init():void{

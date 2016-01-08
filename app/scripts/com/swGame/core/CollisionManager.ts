@@ -1,0 +1,66 @@
+/**
+ * Created by had on 1/8/16.
+ */
+
+/// <reference path="../SpaceWarsGame.ts" />
+/// <reference path="./../display/Bullet.ts" />
+/// <reference path="./../utils/maths/getABDistance.ts" />
+/// <reference path="./../events/CollisionEvent.ts" />
+
+module com.swGame.core{
+
+    import Bullet = com.swGame.display.Bullet;
+    import getABDistance = com.swGame.utils.maths.getABDistance;
+    import CollisionEvent = com.swGame.events.CollisionEvent;
+
+    export class CollisionManager extends createjs.EventDispatcher{
+
+        private _playerHitArea:createjs.Shape;
+
+        constructor(private _game:SpaceWarsGame){
+            this.setplayerHitArea();
+        }
+
+        update():void {
+            this._playerHitArea.x = this._game.player.x;
+            this._playerHitArea.y = this._game.player.y;
+            //this.rocksVsShipCollision();
+            this.bulletVsRockCollision();
+        }
+
+        private setplayerHitArea(){
+            this._playerHitArea = new createjs.Shape();
+            this._playerHitArea.graphics.beginStroke("red")
+                .setStrokeStyle(2)
+                .drawCircle(0,0,this._game.player.radius)
+                .closePath();
+
+            this._game.stage.addChild(this._playerHitArea);
+        }
+
+        /*determina si hubo interseccion*/
+
+        private bulletVsRockCollision():void {
+
+            var allBullets= this._game.player.gun.bulletCollection;
+            var allRocks = this._game.spaceRocksManager.allRocks;
+
+            for(var indexB in allBullets){
+                var bullet:Bullet= allBullets[indexB];
+                var a = {x: bullet.x, y: bullet.y};
+                for(var indexR in allRocks){
+                    var rock:AbstractSpaceRock= allRocks[indexR];
+                    var b = {x: rock.x, y: rock.y};
+                    var distance = getABDistance(a,b);
+                    if(distance < (bullet.radius +rock.radius)){
+                        var event = new CollisionEvent(CollisionEvent.BULLET_ROCK_COLLISION_EVENT);
+                        console.log(rock);
+                        event.bulletRockCollisionData = {bullet:bullet,rock:rock};
+                        this.dispatchEvent(event);
+                    }
+                }
+        }
+
+    }
+
+}

@@ -20,14 +20,15 @@ module com.swGame.core{
 
         static ROCK_MAX_INTERVAL:number = 800;
 
-        constructor(private _stage) {
+        constructor(private _stage:createjs.Stage) {
+
         }
 
         get allRocks():Array<AbstractSpaceRock> {
             return this._rockCollection;
         }
 
-        public update(delta): void {
+        update(delta:number): void {
             this._deltaTime = delta;
             this.shoot();
 
@@ -40,6 +41,15 @@ module com.swGame.core{
                 }
 
             }
+        }
+
+        removeSpaceRock(spaceRock:AbstractSpaceRock):void{
+
+            this._stage.removeChild(spaceRock);
+            var deleteR= this._rockCollection.indexOf(spaceRock);
+            this._rockCollection.splice(deleteR, 1);
+            RockPool.getInstance().free(spaceRock);
+
         }
 
         private shoot(){

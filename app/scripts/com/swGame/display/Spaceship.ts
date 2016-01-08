@@ -14,23 +14,28 @@ module com.swGame.display {
 
     export class Spaceship extends createjs.Shape {
 
-        public  gun:Gun;
-        private _radius:number;
+        private _gun:Gun;
+        private _radius:number= 14;
         private _shipSpeed:number= 0;
 
         constructor(private _canvasSize:{w:number;h:number}){
-
             super();
             this.init();
-            this._radius= 14;
+        }
 
+        get radius():number{
+            return this._radius;
+        }
+
+        get gun():Gun{
+            return this._gun;
         }
 
         init():void {
 
             this.resetShipSpeed();
             this.drawGraphics();
-            this.gun = new Gun(this);
+            this._gun = new Gun(this);
 
             this.x = 120;
             this.y = 120;
@@ -39,7 +44,7 @@ module com.swGame.display {
 
         update(delta:number):void{
             this.changePosition();
-            this.gun.update(delta);
+            this._gun.update(delta);
         }
 
         resetShipSpeed():void{
