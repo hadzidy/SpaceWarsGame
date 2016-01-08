@@ -18,7 +18,7 @@ module com.swGame.core{
         private _deltaTime:number;
         private _rockTimer:number= 0;
 
-        static ROCK_MAX_INTERVAL:number = 800;
+        static ROCK_MAX_INTERVAL:number = 400;
 
         constructor(private _stage:createjs.Stage) {
 

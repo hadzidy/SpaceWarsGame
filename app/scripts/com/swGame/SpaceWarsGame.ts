@@ -13,6 +13,7 @@
 module com.swGame {
 
     import Spaceship = com.swGame.display.Spaceship;
+    import Hud = com.swGame.display.Hud;
     import Bullet = com.swGame.display.Bullet;
     import AbstractSpaceRock = com.swGame.display.AbstractSpaceRock;
     import KeyboardController = com.swGame.ui.KeyboardController;
@@ -52,22 +53,33 @@ module com.swGame {
             this._collisionManager = new CollisionManager(this);
 
             this._collisionManager.addEventListener(CollisionEvent.BULLET_ROCK_COLLISION_EVENT, (e:CollisionEvent)=>{
-                var bulletToRemove:Bullet = e.bulletRockCollisionData.bullet;
-                var rockToRemove:AbstractSpaceRock = e.bulletRockCollisionData.rock;
+                var bulletToRemove:Bullet = e.collisionData.bullet;
+                var rockToRemove:AbstractSpaceRock = e.collisionData.rock;
                 this._player.gun.removeBullet(bulletToRemove);
                 this._spaceRocksManager.removeSpaceRock(rockToRemove);
             });
 
+            this._collisionManager.addEventListener(CollisionEvent.ROCK_SHIP_COLLISION_EVENT, ()=>{
+                this.stopTicker();
+                setTimeout(()=>{
+                    this._stage.clear();
+                },200);
+            });
+
         }
 
-        setTicker(){
+        private setTicker():void{
             this._ticker_handler = this.tick.bind(this);
             createjs.Ticker.setFPS(60);
             this.startTicker();
         }
 
-        startTicker ():void {
+        private startTicker ():void {
             createjs.Ticker.addEventListener("tick", this._ticker_handler);
+        }
+
+        private stopTicker ():void {
+            createjs.Ticker.removeEventListener("tick", this._ticker_handler);
         }
 
         private tick (event:Event):void {
@@ -77,7 +89,6 @@ module com.swGame {
             this._spaceRocksManager.update(deltaTime);
             this._collisionManager.update();
         }
-
 
     }
 }

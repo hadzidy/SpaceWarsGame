@@ -12,7 +12,7 @@ module com.swGame.display {
 
     export class Meteorite extends AbstractSpaceRock{
 
-        public _radius:number= 20;
+        public _radius:number= 10;
         public target:IPoint= {x:400,y:400};
         public rockSpeed:number= 8;
 

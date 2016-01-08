@@ -16,7 +16,7 @@ module com.swGame.events {
         static ROCK_SHIP_COLLISION_EVENT = "CollisionManager.RockShipCollisionEvent";
         static BULLET_ROCK_COLLISION_EVENT = "CollisionManager.BulletRockCollisionEvent";
 
-        public bulletRockCollisionData:{bullet:Bullet; rock:ISpaceRock};
+        public collisionData:{bullet:Bullet; rock:ISpaceRock};
 
         constructor (type:string) {
             super(type, false, false);
